@@ -1,4 +1,5 @@
 ﻿using Microsoft.DocAsCode.MarkdownLite;
+using System.Linq;
 
 namespace MarkdownToKeywords
 {
@@ -7,7 +8,13 @@ namespace MarkdownToKeywords
         public static string RemoveStopWords(this string content)
         {
             // TODO
-            return content.Trim(' ', '.');
+            var words = content.ToLower().Split(' ', '\n');
+
+            var collection = from word in words
+                             let w = word.Trim(new[] { ',', '.', ';', '(', '[', ']', ')', '"', '\'', '\r', '\n' })
+                             where !string.IsNullOrEmpty(w) && !StopWords.Contains(w)
+                             select w;
+            return string.Join(Constants.Separator, collection);
         }
 
         /// <summary>
