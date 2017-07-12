@@ -89,19 +89,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
-    <Compile Include="Helper.cs" />
+    <Compile Include="Common\Constants.cs" />
+    <Compile Include="Common\Helper.cs" />
     <Compile Include="KeywordsRenderer.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StopWords.cs" />
+    <Compile Include="Common\StopWords.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="stopwords.txt">
+    <Content Include="Data\stopwords.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

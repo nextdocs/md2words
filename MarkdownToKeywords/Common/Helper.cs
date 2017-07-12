@@ -1,4 +1,6 @@
 ﻿using Microsoft.DocAsCode.MarkdownLite;
+using System;
+using System.IO;
 using System.Linq;
 
 namespace MarkdownToKeywords
@@ -11,20 +13,19 @@ namespace MarkdownToKeywords
             var words = content.ToLower().Split(' ', '\n');
 
             var collection = from word in words
-                             let w = word.Trim(new[] { ',', '.', ';', '(', '[', ']', ')', '"', '\'', '\r', '\n' })
+                             let w = word.Trim(new[] { ' ', ',', '.', ';', '(', '[', ']', '*', ')', '"', '\'', '\r', '\n' })
                              where !string.IsNullOrEmpty(w) && !StopWords.Contains(w)
                              select w;
             return string.Join(Constants.Separator, collection);
         }
 
-        /// <summary>
-        /// if link is path, then call ResolveRelativePath
-        /// if link is href, then call NormalizeHref
-        /// </summary>
-        public static string NormalizeLink(this string link)
+        public static string NormalizeLink(this string link, string baseDir)
         {
-            // TODO
-            return link;
+            if (Uri.IsWellFormedUriString(link, UriKind.RelativeOrAbsolute))
+            {
+                return NormalizeHref(link);
+            }
+            return ResolveRelativePath(link, baseDir);
         }
 
         public static string NormalizeHref(this string href)
@@ -33,10 +34,23 @@ namespace MarkdownToKeywords
             return href;
         }
 
-        public static string ResolveRelativePath(this string path)
+        public static string ResolveRelativePath(this string path, string baseDir)
         {
-            // TODO
-            return path;
+            if (string.IsNullOrEmpty(baseDir))
+            {
+                return path;
+            }
+
+            if (!baseDir.EndsWith("/") || !baseDir.EndsWith("\\"))
+            {
+                baseDir += "/";
+            }
+
+            var pathUri = new Uri(path);
+            var baseDirUri = new Uri(baseDir);
+            var resovedUri = baseDirUri.MakeRelativeUri(pathUri);
+
+            return resovedUri.ToString();
         }
     }
 }

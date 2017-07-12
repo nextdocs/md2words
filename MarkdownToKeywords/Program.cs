@@ -57,7 +57,7 @@ namespace MarkdownToKeywords
             }
 
             var builder = DocfxFlavoredMarked.CreateBuilder(baseDir);
-            var engine = builder.CreateDfmEngine(new KeywordsRenderer());
+            var engine = builder.CreateDfmEngine(new KeywordsRenderer(baseDir));
             var result = engine.Markup(content, filePath);
 
             return result;
