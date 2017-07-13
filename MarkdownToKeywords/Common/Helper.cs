@@ -19,13 +19,13 @@ namespace MarkdownToKeywords
             return string.Join(Constants.Separator, collection);
         }
 
-        public static string NormalizeLink(this string link, string baseDir)
+        public static string NormalizeLink(this string link, string filePath, string baseDir)
         {
-            if (Uri.IsWellFormedUriString(link, UriKind.RelativeOrAbsolute))
+            if (Uri.IsWellFormedUriString(link, UriKind.Absolute))
             {
                 return NormalizeHref(link);
             }
-            return ResolveRelativePath(link, baseDir);
+            return ResolveRelativePath(link, filePath, baseDir);
         }
 
         public static string NormalizeHref(this string href)
@@ -34,20 +34,23 @@ namespace MarkdownToKeywords
             return href;
         }
 
-        public static string ResolveRelativePath(this string path, string baseDir)
+        public static string ResolveRelativePath(this string path, string filePath, string baseDir)
         {
             if (string.IsNullOrEmpty(baseDir))
             {
                 return path;
             }
 
-            if (!baseDir.EndsWith("/") || !baseDir.EndsWith("\\"))
+            var dir = Path.GetDirectoryName(filePath);
+            var fullPath = Path.GetFullPath(Path.Combine(dir, path));
+
+            if (!baseDir.EndsWith("/") && !baseDir.EndsWith("\\"))
             {
                 baseDir += "/";
             }
 
-            var pathUri = new Uri(path);
-            var baseDirUri = new Uri(baseDir);
+            var pathUri = new Uri(fullPath);
+            var baseDirUri = new Uri(Path.GetFullPath(baseDir));
             var resovedUri = baseDirUri.MakeRelativeUri(pathUri);
 
             return resovedUri.ToString();

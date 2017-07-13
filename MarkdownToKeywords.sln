@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26430.12
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownToKeywords", "MarkdownToKeywords\MarkdownToKeywords.csproj", "{93C2AF71-7620-4CF8-B89B-66EF359D0292}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkdownToKeywords.Test", "MarkdownToKeywords.Test\MarkdownToKeywords.Test.csproj", "{BA2DEC23-290C-4C9B-A948-A018B2A91032}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{93C2AF71-7620-4CF8-B89B-66EF359D0292}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93C2AF71-7620-4CF8-B89B-66EF359D0292}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93C2AF71-7620-4CF8-B89B-66EF359D0292}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA2DEC23-290C-4C9B-A948-A018B2A91032}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA2DEC23-290C-4C9B-A948-A018B2A91032}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA2DEC23-290C-4C9B-A948-A018B2A91032}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA2DEC23-290C-4C9B-A948-A018B2A91032}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

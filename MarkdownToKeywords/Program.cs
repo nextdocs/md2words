@@ -28,16 +28,11 @@ namespace MarkdownToKeywords
             return 0;
         }
 
-        public static string Transform(string filePath, string baseDir)
+        public static string Transform(string filePath, string baseDir = null)
         {
             if (string.IsNullOrEmpty(filePath))
             {
                 throw new ArgumentException($"{nameof(filePath)} can't null or empty.");
-            }
-
-            if (baseDir == null)
-            {
-                throw new ArgumentNullException(baseDir);
             }
 
             if (!File.Exists(filePath))
@@ -50,14 +45,9 @@ namespace MarkdownToKeywords
 
         private static string TransformCore(string filePath, string baseDir)
         {
-            string content;
-            using (var sr = new StreamReader(filePath))
-            {
-                content = sr.ReadToEnd();
-            }
-
+            var content = File.ReadAllText(filePath);
             var builder = DocfxFlavoredMarked.CreateBuilder(baseDir);
-            var engine = builder.CreateDfmEngine(new KeywordsRenderer(baseDir));
+            var engine = builder.CreateDfmEngine(new KeywordsRenderer(filePath, baseDir));
             var result = engine.Markup(content, filePath);
 
             return result;
