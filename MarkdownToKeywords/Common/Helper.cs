@@ -41,6 +41,11 @@ namespace MarkdownToKeywords
                 return path;
             }
 
+            if (path.StartsWith("~"))
+            {
+                return path.TrimStart('~', '/', '\\');
+            }
+
             var dir = Path.GetDirectoryName(filePath);
             var fullPath = Path.GetFullPath(Path.Combine(dir, path));
 

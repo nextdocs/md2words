@@ -14,7 +14,7 @@ namespace MarkdownToKeywords.Test
             var result = Program.Transform(filePath);
             var expect = "test stop words";
 
-            Assert.Equal(result, expect);
+            Assert.Equal(result.Trim(), expect);
         }
     }
 }

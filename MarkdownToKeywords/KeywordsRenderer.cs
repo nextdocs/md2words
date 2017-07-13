@@ -24,18 +24,17 @@ namespace MarkdownToKeywords
                 foreach (var t in children)
                 {
                     content += render.Render(t);
-                    content += Constants.Separator;
                 }
             }
 
-            var length = content.GetLength();
-            return content.Substring(0, length - 1);
+            return content;
         }
 
         public virtual StringBuffer Render(IMarkdownRenderer render, MarkdownTextToken token, IMarkdownContext context)
         {
             var content = StringBuffer.Empty;
             content += token.Content.RemoveStopWords();
+            content += Constants.Separator;
 
             return content;
         }
@@ -44,6 +43,7 @@ namespace MarkdownToKeywords
         {
             var content = StringBuffer.Empty;
             content += token.Href.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
@@ -60,6 +60,7 @@ namespace MarkdownToKeywords
             }
 
             content += token.Href.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
@@ -68,6 +69,7 @@ namespace MarkdownToKeywords
         {
             var content = StringBuffer.Empty;
             content += token.Src.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
@@ -76,6 +78,7 @@ namespace MarkdownToKeywords
         {
             var content = StringBuffer.Empty;
             content += token.Src.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
@@ -84,6 +87,7 @@ namespace MarkdownToKeywords
         {
             var content = StringBuffer.Empty;
             content += token.Path.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
@@ -92,6 +96,7 @@ namespace MarkdownToKeywords
         {
             var content = StringBuffer.Empty;
             content += token.Link.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
@@ -100,6 +105,7 @@ namespace MarkdownToKeywords
         {
             var content = StringBuffer.Empty;
             content += token.Href.NormalizeLink(_filePath, _baseDir);
+            content += Constants.Separator;
 
             return content;
         }
